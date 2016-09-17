@@ -1,52 +1,37 @@
-#include <iostream>
-#include <OpenGL/OpenGL.h>
-#include <GLUT/glut.h>
+#include <GLFW/glfw3.h>
 
-using namespace std;
+int main(void)
+{
+    GLFWwindow* window;
 
+    /* Initialize the library */
+    if (!glfwInit())
+        return -1;
 
-void display() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
+    /* Create a windowed mode window and its OpenGL context */
+    window = glfwCreateWindow(640, 480, "Hello World - fangjun", NULL, NULL);
+    if (!window)
+    {
+        glfwTerminate();
+        return -1;
+    }
 
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-2.0, 2.0, -2.0, 2.0, -2.0, 500.0);
+    /* Make the window's context current */
+    glfwMakeContextCurrent(window);
 
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(2, 2, 2, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-    glScalef(.005,.005,.005);
-    glRotatef(20, 0, 1, 0);
-    glRotatef(30, 0, 0, 1);
-    glRotatef(5, 1, 0, 0);
-    glTranslatef(-300, 0, 0);
+    /* Loop until the user closes the window */
+    while (!glfwWindowShouldClose(window))
+    {
+        /* Render here */
+        glClear(GL_COLOR_BUFFER_BIT);
 
-    glColor3f(1,1,1);
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'H');
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'e');
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'l');
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'l');
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'o');
+        /* Swap front and back buffers */
+        glfwSwapBuffers(window);
 
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'W');
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'o');
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'r');
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'l');
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, 'd');
-    glutStrokeCharacter(GLUT_STROKE_ROMAN, '!');
+        /* Poll for and process events */
+        glfwPollEvents();
+    }
 
-    glutSwapBuffers();
-} /* end func displayCall */
-
-int main(int argc, char *argv[]) {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-    glutInitWindowSize(500, 500);
-    glutInitWindowPosition(300, 200);
-    glutCreateWindow("Hello World!");
-    glutDisplayFunc(display);
-    glutMainLoop();
-
+    glfwTerminate();
     return 0;
 }

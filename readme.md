@@ -26,9 +26,35 @@
  - [SDL][11], Simple DirectMedia Layer 
  - [SFML][12], Simple and Fast Multimedia Library
  - [Allegro][13], a game programming library
+ - [GLEW][15], The OpenGL Extension Wrangler Library
+ - [GLM][16], OpenGL Mathematics
+
+## Install GLFW on Mac OS x
+ - install brew , then add path `/usr/local/bin/brew`
+ 
+```
+brew update
+brew tap homebrew/versions
+brew install glfw3
+# or install version 2
+# /usr/local/Cellar/glfw2/2.7.9
+rew install glfw2
+
+# or static build
+brew install --static glfw3
+
+brew install --static glew
+```
+
+ - lib: `/usr/local/lib`
+ - header: `/usr/local/include`
+ - link: `-framework OpenGl -lglfw3`
 
 
 
+
+[16]: https://github.com/g-truc/glm
+[15]: http://glew.sourceforge.net
 [14]: https://github.com/glfw/glfw
 [13]: http://liballeg.org/index.html
 [12]: http://www.sfml-dev.org
