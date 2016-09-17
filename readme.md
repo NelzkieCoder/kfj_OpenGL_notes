@@ -27,7 +27,11 @@
  - [SFML][12], Simple and Fast Multimedia Library
  - [Allegro][13], a game programming library
  - [GLEW][15], The OpenGL Extension Wrangler Library
+    - install: `brew install glew`
+    - location: `/usr/local/Cellar/glew/1.13.0`
  - [GLM][16], OpenGL Mathematics
+ - [Vulkan (API)][17]
+ - [Metal for Developers][18], by Apple
 
 ## Install GLFW on Mac OS x
  - install brew , then add path `/usr/local/bin/brew`
@@ -41,18 +45,19 @@ brew install glfw3
 rew install glfw2
 
 # or static build
+# /usr/local/Cellar/glfw3/3.2.1
 brew install --static glfw3
 
 brew install --static glew
 ```
 
- - lib: `/usr/local/lib`
- - header: `/usr/local/include`
+ - lib: `/usr/local/lib`, `/usr/local/Cellar/glfw3/3.2.1/lib`
+ - header: `/usr/local/include`, `/usr/local/Cellar/glfw3/3.2.1/include`
  - link: `-framework OpenGl -lglfw3`
 
 
-
-
+[18]: https://developer.apple.com/metal/
+[17]: https://en.wikipedia.org/wiki/Vulkan_(API)
 [16]: https://github.com/g-truc/glm
 [15]: http://glew.sourceforge.net
 [14]: https://github.com/glfw/glfw
