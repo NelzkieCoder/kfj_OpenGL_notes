@@ -42,7 +42,7 @@ brew tap homebrew/versions
 brew install glfw3
 # or install version 2
 # /usr/local/Cellar/glfw2/2.7.9
-rew install glfw2
+brew install glfw2
 
 # or static build
 # /usr/local/Cellar/glfw3/3.2.1
