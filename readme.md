@@ -6,9 +6,12 @@
 ## Tutorials
  - [OpenGL tutorials][2], `http://www.opengl-tutorial.org`
  - [OpenGL dev - Modern OpenGL tutorial][3], `http://ogldev.atspace.co.uk`
+ - [**Learn OpenGL**][4], `http://learnopengl.com`
+ - [OpenGL Programming Book][5], `https://en.wikibooks.org/wiki/OpenGL_Programming`
 
- 
- 
+
+[5]: https://en.wikibooks.org/wiki/OpenGL_Programming
+[4]: http://learnopengl.com
 [3]: http://ogldev.atspace.co.uk 
 [2]: http://www.opengl-tutorial.org
 [1]: https://www.jetbrains.com/clion/
