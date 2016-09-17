@@ -3,6 +3,10 @@
  
  The IDE used is [CLion][1]. Its configuration file on Mac OS x is `~/Library/Preferences/CLion2016.1`. 
 
+
+# TODO
+ - [Draw a triangle][19]
+
 ## API manual
  - [OpenGL 4.5 Reference Pages][6]
  - [OpenGL Registry][8], information for various versions of OpenGL.
@@ -56,6 +60,10 @@ brew install --static glew
  - link: `-framework OpenGl -lglfw3`
 
 
+
+
+
+[19]: http://learnopengl.com/#!Getting-started/Hello-Triangle
 [18]: https://developer.apple.com/metal/
 [17]: https://en.wikipedia.org/wiki/Vulkan_(API)
 [16]: https://github.com/g-truc/glm
