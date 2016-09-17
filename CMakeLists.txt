@@ -4,6 +4,7 @@ project(kfj_OpenGL_notes)
 # /System/Library/Frameworks/OpenGL.framework
 # set(CMAKE_PREFIX_PATH /usr/local/Cellar/glfw3/3.2.1)
 
+# set(CMAKE_PREFIX_PATH /usr/local/Cellar/glew)
 
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -13,14 +14,29 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # brew tap homebrew/versions
 # brew install glfw3
 
-link_directories(/usr/local/Cellar/glfw3/3.2.1/lib)
+# /usr/local/Cellar/glew/1.13.0/lib/libGLEW.dylib
+# /usr/local/Cellar/glew/1.13.0/lib/libGLEW.a
+# /usr/local/Cellar/glew/1.13.0/lib/libGLEWmx.dylib
+# /usr/local/Cellar/glew/1.13.0/lib/libGLEWmx.a
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lglfw3  -framework OpenGL")
+# brew install glew
+
+link_directories(
+        /usr/local/Cellar/glfw3/3.2.1/lib
+        /usr/local/Cellar/glew/1.13.0/lib
+)
+
+set(myLib  "-lglfw3 -lGLEW -framework OpenGL")
+
+set(CMAKE_CXX_LINK_FLAGS  "${CMAKE_CXX_LINK_FLAGS} ${myLib}")
 
 
 include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/inc
 )
 
-set(SOURCE_FILES src/main.cpp)
+set(SOURCE_FILES
+        src/main.cpp
+        src/1_hello_world.cpp
+        )
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
