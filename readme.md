@@ -21,7 +21,19 @@
  - [Learn OpenGL ES][7]
 
 
+## Tools
+ - [**GLFW**][10], [source code][14] on GitHub
+ - [SDL][11], Simple DirectMedia Layer 
+ - [SFML][12], Simple and Fast Multimedia Library
+ - [Allegro][13], a game programming library
 
+
+
+[14]: https://github.com/glfw/glfw
+[13]: http://liballeg.org/index.html
+[12]: http://www.sfml-dev.org
+[11]: http://www.libsdl.org/index.php
+[10]: http://www.glfw.org
 [9]: https://learnopengl-cn.github.io
 [8]: https://www.opengl.org/registry/
 [7]: http://www.learnopengles.com
