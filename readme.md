@@ -6,10 +6,10 @@
 
 # TODO
  - ~~[Draw a triangle][19]~~ -> [2_hello_triangle.cpp][21]
-   - Use element buffer
+   - ~~Use element buffer ~~ -> [2_hello_triangle_with_element_buffer.cpp][22]
    - draw two triangles
    - draw a circle
-
+~
 
 
 ## API manual
@@ -75,6 +75,10 @@ brew install --static glew
 
 
 
+
+
+
+[22]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_triangle_with_element_buffer.cpp
 [21]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_triangle.cpp
 [20]: https://en.wikipedia.org/wiki/OpenGL_Shading_Language
 [19]: http://learnopengl.com/#!Getting-started/Hello-Triangle
