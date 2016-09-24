@@ -27,6 +27,8 @@
 
 #include <fstream>
 
+#include "Shader.hpp"
+
 // Window dimensions
 const static GLuint WIDTH = 800, HEIGHT = 600;
 
@@ -86,70 +88,11 @@ int hello_triangle()
     //             [0, 600]
     glViewport(0, 0, width, height);
 
-    // load and compile vertex shader
-    std::string vertexShaderSrc = loadShaderFromFile(VERTEX_SHADER_FILENAME);
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    Shader shader;
+    shader.setVertexShaderFilename(VERTEX_SHADER_FILENAME);
+    shader.setFragShaderFilename(FRAGMENT_SHADER_FILENAME);
+    shader.linkProgram();
 
-    const char *p = vertexShaderSrc.c_str();
-    glShaderSource(vertexShader, 1, &p, nullptr);
-    glCompileShader(vertexShader);
-
-    GLint success = GL_FALSE;
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        GLint len;
-        glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &len);
-        std::string logInfo(len - 1, 0); // as null terminator is contained in the length
-        glGetShaderInfoLog(vertexShader, len, nullptr, &logInfo[0]);
-        std::cout << "compile info for vertex shader : " << std::endl
-        << logInfo << std::endl;
-        return -1;
-    }
-
-    // load and compile fragment shader
-    std::string fragShaderSrc = loadShaderFromFile(FRAGMENT_SHADER_FILENAME);
-    GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-    p = fragShaderSrc.c_str();
-    glShaderSource(fragShader, 1, &p, nullptr);
-    glCompileShader(fragShader);
-
-    success = GL_FALSE;
-    glGetShaderiv(fragShader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        GLint len;
-        glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &len);
-        std::string logInfo(len - 1, 0); // as null terminator is contained in the length
-        glGetShaderInfoLog(fragShader, len, nullptr, &logInfo[0]);
-        std::cout << "compile info for fragment shader : " << std::endl
-        << logInfo << std::endl;
-        return -1;
-    }
-
-    // link shaders into a program
-    GLuint program = glCreateProgram();
-    glAttachShader(program, vertexShader);
-    glAttachShader(program, fragShader);
-    glLinkProgram(program);
-
-    success = GL_FALSE;
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-    if(!success)
-    {
-        GLint len;
-        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &len);
-        std::string logInfo(len - 1, 0); // as null terminator is contained in the length
-        glGetProgramInfoLog(program, len, nullptr, &logInfo[0]);
-        std::cout << "link info for program : " << std::endl
-        << logInfo << std::endl;
-        return -1;
-    }
-
-    // once linked, shaders are needed any more.
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragShader);
 
     // set the coordinate of the triangle vertices
     GLfloat vertices[] = {
@@ -191,7 +134,7 @@ int hello_triangle()
         glClear(GL_COLOR_BUFFER_BIT);
 
         // draw the triangle
-        glUseProgram(program);
+        shader.useProgram();
         glBindVertexArray(vao);
         glDrawArrays(
                 GL_TRIANGLES, // primitives
@@ -203,8 +146,7 @@ int hello_triangle()
 
         glfwSwapBuffers(window);
     }
-
-
+    
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
 
