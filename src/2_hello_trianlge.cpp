@@ -128,17 +128,85 @@ int hello_triangle()
         return -1;
     }
 
+    // link shaders into a program
+    GLuint program = glCreateProgram();
+    glAttachShader(program, vertexShader);
+    glAttachShader(program, fragShader);
+    glLinkProgram(program);
+
+    success = GL_FALSE;
+    glGetProgramiv(program, GL_LINK_STATUS, &success);
+    if(!success)
+    {
+        GLint len;
+        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &len);
+        std::string logInfo(len - 1, 0); // as null terminator is contained in the length
+        glGetProgramInfoLog(program, len, nullptr, &logInfo[0]);
+        std::cout << "link info for program : " << std::endl
+        << logInfo << std::endl;
+        return -1;
+    }
+
+    // once linked, shaders are needed any more.
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragShader);
+
+    // set the coordinate of the triangle vertices
+    GLfloat vertices[] = {
+            -0.5f, -0.5f, 0.0f, // left vertex
+            0.5f, -0.5f, 0.0f,  // right vertex
+            0.0f, 0.5f, 0.0f,   // top vertex
+    };
+
+    GLuint vbo, vao;
+    glGenVertexArrays(1, &vao);
+    glGenBuffers(1, &vbo);
+
+    // set the current vertex array.
+    glBindVertexArray(vao);
+
+    glBindBuffer(GL_ARRAY_BUFFER ,vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(
+            0, // index, which attribute
+            3, // number of component per vertex attribute. Each coordinate contains 3 component
+            GL_FLOAT, // data type of each component
+            GL_FALSE, // need to be normalized ?
+            0,  // stride, 0 -> compact, OpenGL will compute it. non-zero --> number of byte between two consecutive vertices
+            nullptr);   // offset
+
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);   // reset
+    glBindVertexArray(0);
 
 
     while(!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
 
+        // clear the color buffer
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // draw the triangle
+        glUseProgram(program);
+        glBindVertexArray(vao);
+        glDrawArrays(
+                GL_TRIANGLES, // primitives
+                0, // starting index
+                3 // number of indices
+        );
+
+        glBindVertexArray(0); // reset;
+
         glfwSwapBuffers(window);
     }
+
+
+    glDeleteVertexArrays(1, &vao);
+    glDeleteBuffers(1, &vbo);
 
     glfwTerminate();
 
