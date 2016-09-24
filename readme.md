@@ -5,7 +5,7 @@
 
 
 # TODO
- - [Draw a triangle][19]
+ - [Draw a triangle][19] -> [2_hello_trianlge.cpp][21]
 
 ## API manual
  - [OpenGL 4.5 Reference Pages][6]
@@ -68,6 +68,9 @@ brew install --static glew
 
 
 
+
+
+[21]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_trianlge.cpp
 [20]: https://en.wikipedia.org/wiki/OpenGL_Shading_Language
 [19]: http://learnopengl.com/#!Getting-started/Hello-Triangle
 [18]: https://developer.apple.com/metal/
