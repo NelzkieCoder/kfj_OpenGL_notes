@@ -10,6 +10,9 @@
 ## API manual
  - [OpenGL 4.5 Reference Pages][6]
  - [OpenGL Registry][8], information for various versions of OpenGL.
+ 
+## GLSL
+ - [OpenGL Shading Language][20], Wikipedia
 
 ## Tutorials
  - [OpenGL tutorials][2], `http://www.opengl-tutorial.org`
@@ -63,6 +66,9 @@ brew install --static glew
 
 
 
+
+
+[20]: https://en.wikipedia.org/wiki/OpenGL_Shading_Language
 [19]: http://learnopengl.com/#!Getting-started/Hello-Triangle
 [18]: https://developer.apple.com/metal/
 [17]: https://en.wikipedia.org/wiki/Vulkan_(API)

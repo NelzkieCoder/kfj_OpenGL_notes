@@ -37,6 +37,8 @@ include_directories(
 
 set(SOURCE_FILES
         src/main.cpp
+        src/util.cpp
         src/1_hello_world.cpp
-        )
+        src/2_hello_trianlge.cpp
+        src/util.cpp)
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
