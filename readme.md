@@ -6,10 +6,10 @@
 
 # TODO
  - ~~[Draw a triangle][19]~~ -> [2_hello_triangle.cpp][21]
-   - ~~Use element buffer ~~ -> [2_hello_triangle_with_element_buffer.cpp][22]
+   - ~~Use element buffer~~ -> [2_hello_triangle_with_element_buffer.cpp][22]
    - draw two triangles
    - draw a circle
-~
+
 
 
 ## API manual
