@@ -1,5 +1,5 @@
 //
-// Created by fangjun on 17/09/16.
+// Created by fangjun on 24/09/16.
 //
 
 /*
@@ -146,7 +146,7 @@ int hello_triangle()
 
         glfwSwapBuffers(window);
     }
-    
+
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
 
