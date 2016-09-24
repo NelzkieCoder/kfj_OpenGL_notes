@@ -33,6 +33,9 @@ const static GLuint WIDTH = 800, HEIGHT = 600;
 // vertex shader source filename
 const static std::string VERTEX_SHADER_FILENAME = "src/shaders/2_hello_triangle_vertex_shader.txt";
 
+// fragment shader source filename
+const static std::string FRAGMENT_SHADER_FILENAME = "src/shaders/2_hello_triangle_fragment_shader.txt";
+
 
 
 
@@ -103,6 +106,29 @@ int hello_triangle()
         << logInfo << std::endl;
         return -1;
     }
+
+    // load and compile fragment shader
+    std::string fragShaderSrc = loadShaderFromFile(FRAGMENT_SHADER_FILENAME);
+    GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    p = fragShaderSrc.c_str();
+    glShaderSource(fragShader, 1, &p, nullptr);
+    glCompileShader(fragShader);
+
+    success = GL_FALSE;
+    glGetShaderiv(fragShader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        GLint len;
+        glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &len);
+        std::string logInfo(len - 1, 0); // as null terminator is contained in the length
+        glGetShaderInfoLog(fragShader, len, nullptr, &logInfo[0]);
+        std::cout << "compile info for fragment shader : " << std::endl
+        << logInfo << std::endl;
+        return -1;
+    }
+
+
 
     while(!glfwWindowShouldClose(window))
     {
