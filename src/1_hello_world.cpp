@@ -26,7 +26,7 @@
 #include <iostream>
 
 // Window dimensions
-const GLuint WIDTH = 800, HEIGHT = 600;
+const static GLuint kWidth = 800, kHeight = 600;
 
 /**
  *
@@ -50,7 +50,7 @@ int hello_world()
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(kWidth, kHeight, "LearnOpenGL", nullptr, nullptr);
     if (window == nullptr)
     {
         std::cout << "Failed to create GLFW window" << std::endl;

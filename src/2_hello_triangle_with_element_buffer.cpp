@@ -30,13 +30,13 @@
 #include "Shader.hpp"
 
 // Window dimensions
-const static GLuint WIDTH = 800, HEIGHT = 600;
+const static GLuint kWidth = 800, kHeight = 600;
 
 // vertex shader source filename
-const static std::string VERTEX_SHADER_FILENAME = "src/shaders/2_hello_triangle_vertex_shader.txt";
+const static std::string kVertexShaderFilename = "src/shaders/2_hello_triangle_vertex_shader.txt";
 
 // fragment shader source filename
-const static std::string FRAGMENT_SHADER_FILENAME = "src/shaders/2_hello_triangle_fragment_shader.txt";
+const static std::string kFragShaderFilename = "src/shaders/2_hello_triangle_fragment_shader.txt";
 
 
 
@@ -57,7 +57,7 @@ int hello_triangle_with_element_buffer()
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(kWidth, kHeight, "LearnOpenGL", nullptr, nullptr);
     if (window == nullptr)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -89,8 +89,8 @@ int hello_triangle_with_element_buffer()
     glViewport(0, 0, width, height);
 
     Shader shader;
-    shader.setVertexShaderFilename(VERTEX_SHADER_FILENAME);
-    shader.setFragShaderFilename(FRAGMENT_SHADER_FILENAME);
+    shader.setVertexShaderFilename(kVertexShaderFilename);
+    shader.setFragShaderFilename(kFragShaderFilename);
     shader.linkProgram();
 
 
