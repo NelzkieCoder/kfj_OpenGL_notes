@@ -123,7 +123,7 @@ int hello_two_triangles()
             3, // number of component per vertex attribute. Each coordinate contains 3 component
             GL_FLOAT, // data type of each component
             GL_FALSE, // need to be normalized ?
-            0,  // stride, 0 -> compact, OpenGL will compute it. non-zero --> number of byte between two consecutive vertices
+            0,  // stride, 0 -> compact, OpenGL will compute it. non-zero --> number of bytes between two consecutive vertices
             nullptr);   // offset
 
     glEnableVertexAttribArray(0);
