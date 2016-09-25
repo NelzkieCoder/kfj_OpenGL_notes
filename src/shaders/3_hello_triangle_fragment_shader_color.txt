@@ -1,0 +1,12 @@
+
+#version 330 core
+
+// color is passed from vertex shader
+in vec4 color;
+
+out vec4 result;
+
+void main()
+{
+    result = color;
+}
