@@ -1,6 +1,9 @@
 //
-// Created by fangjun on 24/09/16.
+// Created by fangjun on 25/09/16.
 //
+
+//  draw two triangles
+
 
 /*
  *
@@ -45,7 +48,7 @@ std::string loadShaderFromFile(const std::string filename);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 
-int hello_triangle()
+int hello_two_triangles()
 {
     std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
     glfwInit();
@@ -96,9 +99,13 @@ int hello_triangle()
 
     // set the coordinate of the triangle vertices
     GLfloat vertices[] = {
-            -0.5f, -0.5f, 0.0f, // left vertex
-            0.5f, -0.5f, 0.0f,  // right vertex
-            0.0f, 0.5f, 0.0f,   // top vertex
+            -0.5f, 0.0f, 0.0f, // left vertex
+            -0.1f, 0.0f, 0.0f,  // right vertex
+            -0.1f, 0.5f, 0.0f,   // top vertex
+            // second triangle
+            0.1f, 0.0f, 0.0f,
+            0.5f, 0.0f, 0.0f,
+            0.5f, -0.5f, 0.0f,
     };
 
     GLuint vbo, vao;
@@ -124,6 +131,8 @@ int hello_triangle()
     glBindBuffer(GL_ARRAY_BUFFER, 0);   // reset
     glBindVertexArray(0);
 
+    // comment out this statement to fill the triangle
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     while(!glfwWindowShouldClose(window))
     {
@@ -136,12 +145,32 @@ int hello_triangle()
         // draw the triangle
         shader.useProgram();
         glBindVertexArray(vao);
+
+        // either of the following two drawing methods are fine
+
+#if true
+        // draw two triangles
+        glDrawArrays(
+                GL_TRIANGLES, // primitives
+                0, // starting index
+                6 // number of indices
+        );
+#else
+
+        // first triangle
         glDrawArrays(
                 GL_TRIANGLES, // primitives
                 0, // starting index
                 3 // number of indices
         );
 
+        // second triangle
+        glDrawArrays(
+                GL_TRIANGLES, // primitives
+                3, // starting index
+                3 // number of indices
+        );
+#endif
         glBindVertexArray(0); // reset;
 
         glfwSwapBuffers(window);
