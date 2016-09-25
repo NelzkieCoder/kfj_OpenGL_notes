@@ -6,8 +6,9 @@ int hello_triangle_with_element_buffer();
 int hello_two_triangles();
 int hello_two_triangles_2();
 int hello_two_triangles_2_with_different_color();
+int hello_circle();
 
-#define TEST hello_two_triangles_2_with_different_color
+#define TEST hello_circle
 
 int main(void)
 {
