@@ -4,7 +4,7 @@
 
 /*
  *
- * For the complete source code, refer to http://learnopengl.com/code_viewer.php?code=getting-started/hellotriangle2
+ * For the complete source code, refer to http://learnopengl.com/code_viewer.php?code=getting-started/hellotriangle
  * For the explanation to the code, refer to http://learnopengl.com/#!Getting-started/Hello-Triangle
  */
 
@@ -45,7 +45,7 @@ std::string loadShaderFromFile(const std::string filename);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 
-int hello_triangle_with_element_buffer()
+int hello_triangle()
 {
     std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
     glfwInit();
@@ -94,33 +94,22 @@ int hello_triangle_with_element_buffer()
     shader.linkProgram();
 
 
-    // set the coordinate of the rectangle vertices
+    // set the coordinate of the triangle vertices
     GLfloat vertices[] = {
-            -0.5f, -0.5f, 0.0f, // left bottom, 0
-            -0.5f, 0.5f, 0.0f,  // left top, 1
-            0.5f, 0.5f, 0.0f,   // right top, 2
-            0.5f, -0.5f, 0.0f,  // right bottom, 3
+            -0.5f, -0.5f, 0.0f, // left vertex
+            0.5f, -0.5f, 0.0f,  // right vertex
+            0.0f, 0.5f, 0.0f,   // top vertex
     };
 
-    GLuint indices[] = {
-            0,1,2,  // first triangle
-            0,3,2,  // second triangle
-    };
-
-
-    GLuint vbo, ebo, vao;
+    GLuint vbo, vao;
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
-    glGenBuffers(1, &ebo);
 
     // set the current vertex array.
     glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER ,vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(
             0, // index, which attribute
@@ -135,8 +124,6 @@ int hello_triangle_with_element_buffer()
     glBindBuffer(GL_ARRAY_BUFFER, 0);   // reset
     glBindVertexArray(0);
 
-    // uncomment out the following state to draw wire frame.
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     while(!glfwWindowShouldClose(window))
     {
@@ -149,8 +136,11 @@ int hello_triangle_with_element_buffer()
         // draw the triangle
         shader.useProgram();
         glBindVertexArray(vao);
-
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        glDrawArrays(
+                GL_TRIANGLES, // primitives
+                0, // starting index
+                3 // number of indices
+        );
 
         glBindVertexArray(0); // reset;
 
@@ -159,7 +149,6 @@ int hello_triangle_with_element_buffer()
 
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
-    glDeleteBuffers(1, &ebo);
 
     glfwTerminate();
 
