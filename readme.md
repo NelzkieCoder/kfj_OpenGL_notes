@@ -5,10 +5,10 @@
 
 
 # TODO
- - ~~[Draw a triangle][19]~~ -> [2_hello_triangle.cpp][21]
+ - ~~[Draw a triangle][19]~~ -> [2_hello_triangle.cpp][21], [2_hello_triangle_with_element_buffer.cpp][25]
    - ~~Use element buffer~~ -> [2_hello_triangle_with_element_buffer.cpp][22]
-   - draw two triangles
-   - draw a circle
+   - ~~draw two triangles~~ -> [2_hello_two_triangles.cpp][26], [2_hello_two_triangles_2.cpp][27], [2_hello_two_triangles_2_with_different_color.cpp][28]
+   - ~~draw a circle~~ -> [2_hello_circle.cpp][24]
 
 
 
@@ -73,11 +73,11 @@ brew install --static glew
 
 
 
-
-
-
-
-
+[28]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_two_triangles_2_with_different_color.cpp
+[27]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_two_triangles_2.cpp
+[26]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_two_triangles.cpp
+[25]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_triangle_with_element_buffer.cpp
+[24]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_circle.cpp
 [23]: http://antongerdelan.net/opengl/index.html
 [22]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_triangle_with_element_buffer.cpp
 [21]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/2_hello_triangle.cpp
