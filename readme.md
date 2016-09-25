@@ -9,7 +9,9 @@
    - ~~Use element buffer~~ -> [2_hello_triangle_with_element_buffer.cpp][22]
    - ~~draw two triangles~~ -> [2_hello_two_triangles.cpp][26], [2_hello_two_triangles_2.cpp][27], [2_hello_two_triangles_2_with_different_color.cpp][28]
    - ~~draw a circle~~ -> [2_hello_circle.cpp][24]
- - [Shaders][29]
+ - ~~[Shaders][29]~~
+    - [3_hello_triangle_color.cpp][34]
+    - [3_hello_triangle_uniform.cpp][35]
  - [Textures][30]
  - [Transformations][31]
  - [Coordinate Systems][32]
@@ -75,8 +77,8 @@ brew install --static glew
 
 
 
-
-
+[35]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/3_hello_triangle_uniform.cpp
+[34]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/3_hello_triangle_color.cpp
 [33]: http://learnopengl.com/#!Getting-started/Camera
 [32]: http://learnopengl.com/#!Getting-started/Coordinate-Systems
 [31]: http://learnopengl.com/#!Getting-started/Transformations
