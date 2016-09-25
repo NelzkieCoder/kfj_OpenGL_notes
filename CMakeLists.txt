@@ -42,6 +42,7 @@ set(SOURCE_FILES
         src/2_hello_triangle.cpp
         src/2_hello_triangle_with_element_buffer.cpp
         src/2_hello_two_triangles.cpp
+        src/2_hello_two_triangles_2.cpp
         src/util.cpp
         src/Shader.cpp)
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
