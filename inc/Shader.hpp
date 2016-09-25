@@ -41,6 +41,8 @@ public:
      */
     void useProgram() const;
 
+    GLuint getProgram() const {return m_program;}
+
 private:
     GLuint m_program;
     /**

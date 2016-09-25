@@ -7,8 +7,9 @@ int hello_two_triangles();
 int hello_two_triangles_2();
 int hello_two_triangles_2_with_different_color();
 int hello_circle();
+int hello_triangle_uniform();
 
-#define TEST hello_circle
+#define TEST hello_triangle_uniform
 
 int main(void)
 {
