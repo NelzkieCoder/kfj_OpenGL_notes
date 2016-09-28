@@ -13,7 +13,7 @@
     - [3_hello_triangle_color.cpp][34]
     - [3_hello_triangle_uniform.cpp][35]
  - [Textures][30]
-    - [4_hello_texure.cpp][39]
+    - [4_hello_texture.cpp][39]
  - [Transformations][31]
  - [Coordinate Systems][32]
  - [Camera][33]
@@ -89,7 +89,7 @@ brew install --static glew
 
 
 
-[39]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/4_hello_texure.cpp
+[39]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/4_hello_texture.cpp
 [38]: https://vulkan-tutorial.com
 [37]: https://while.io
 [36]: https://open.gl

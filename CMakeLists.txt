@@ -51,7 +51,7 @@ set(SOURCE_FILES
         src/3_hello_triangle_uniform.cpp
         src/3_hello_triangle_color.cpp
         src/util.cpp
-        src/Shader.cpp src/4_hello_texure.cpp)
+        src/Shader.cpp src/4_hello_texture.cpp)
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
 
 
