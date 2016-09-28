@@ -9,5 +9,6 @@ out vec4 color;
 uniform sampler2D myTexture;
 void main()
 {
-    color = texture(myTexture, myTexCoord);
+    // note that here is component-wise product!
+    color = texture(myTexture, myTexCoord) * vec4(myColor, 1.0f);
 }

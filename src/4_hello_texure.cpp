@@ -36,7 +36,7 @@
 #include "Shader.hpp"
 
 // texture image 1
-const static std::string kImg1 = "pic/wall.jpg";
+const static std::string kImg1 = "pic/container.jpg";
 
 // Window dimensions
 const static GLuint kWidth = 800, kHeight = 600;
@@ -113,6 +113,8 @@ int hello_texture()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+    // TODO: how is the image stored in the memory ???
+    // e.g: how are RGB values store?
     unsigned char* img1 = SOIL_load_image(kImg1.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
     std::cout << "(" << width << ", " << height << ")" << std::endl;
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, img1);
