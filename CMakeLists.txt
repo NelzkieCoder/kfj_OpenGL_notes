@@ -24,9 +24,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 link_directories(
         /usr/local/Cellar/glfw3/3.2.1/lib
         /usr/local/Cellar/glew/1.13.0/lib
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
-set(myLib  "-lglfw3 -lGLEW -framework OpenGL")
+# libSOIL.dylib  -> https://github.com/smibarber/libSOIL
+# set DYLD_LIBRARY_PATH when run the program, because it is dynamic linked!
+set(myLib  "-lSOIL -lglfw3 -lGLEW -framework OpenGL")
 
 set(CMAKE_CXX_LINK_FLAGS  "${CMAKE_CXX_LINK_FLAGS} ${myLib}")
 
@@ -48,5 +51,8 @@ set(SOURCE_FILES
         src/3_hello_triangle_uniform.cpp
         src/3_hello_triangle_color.cpp
         src/util.cpp
-        src/Shader.cpp)
+        src/Shader.cpp src/3_hello_texure.cpp)
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
+
+
+#target_link_libraries(kfj_OpenGL_notes ${CMAKE_SOURCE_DIR}/lib/libSOIL.a)

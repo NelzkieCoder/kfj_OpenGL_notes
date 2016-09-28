@@ -77,6 +77,14 @@ brew install --static glew
  - link: `-framework OpenGl -lglfw3`
 
 
+# SOIL library
+ - go to `https://github.com/smibarber/libSOIL` and download `.zip` file
+ - unzip
+ - go to directory `libSOIL-master`
+ - `make`
+ - copy `libSOIL-master/libSOIL.dylib`
+ - `export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:/Users/fangjun/Documents/bitbucket/kfj_OpenGL_notes/lib`
+
 [38]: https://vulkan-tutorial.com
 [37]: https://while.io
 [36]: https://open.gl
