@@ -103,15 +103,31 @@ int hello_texture()
     shader.setFragShaderFilename(kFragShaderFilename);
     shader.linkProgram();
 
+    GLuint texture1;
+    glGenTextures(1, &texture1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
 
-    unsigned char* image1 = SOIL_load_image(kImg1.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // Set texture filtering
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    unsigned char* img1 = SOIL_load_image(kImg1.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
     std::cout << "(" << width << ", " << height << ")" << std::endl;
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, img1);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SOIL_free_image_data(img1);
+
+    // unbind texture
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     GLfloat vertices[] = {
-            0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, // top right
-            0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,   // bottom left
-            -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f,    // top left
+            // points         // color
+            0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+            0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,   // bottom left
+            -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,   // top left
     };
 
     GLuint indices[] = {
@@ -137,7 +153,7 @@ int hello_texture()
             3, // number of component per vertex attribute. Each coordinate contains 3 component
             GL_FLOAT, // data type of each component
             GL_FALSE, // need to be normalized ?
-            6*sizeof(GLfloat),  // stride, 0 -> compact, OpenGL will compute it. non-zero --> number of bytes between two consecutive vertices
+            8*sizeof(GLfloat),  // stride, 0 -> compact, OpenGL will compute it. non-zero --> number of bytes between two consecutive vertices
             nullptr);   // offset
 
     glEnableVertexAttribArray(0);
@@ -147,14 +163,22 @@ int hello_texture()
             3, // number of component per vertex attribute. Each coordinate contains 3 component
             GL_FLOAT, // data type of each component
             GL_FALSE, // need to be normalized ?
-            6*sizeof(GLfloat),  // stride, 0 -> compact, OpenGL will compute it. non-zero --> number of bytes between two consecutive vertices
+            8*sizeof(GLfloat),  // stride, 0 -> compact, OpenGL will compute it. non-zero --> number of bytes between two consecutive vertices
             reinterpret_cast<GLvoid*>(3*sizeof(GLfloat)));   // offset
 
     glEnableVertexAttribArray(1);
 
+    glVertexAttribPointer(
+            2, // index, which attribute
+            2, // number of component per vertex attribute. Each coordinate contains 3 component
+            GL_FLOAT, // data type of each component
+            GL_FALSE, // need to be normalized ?
+            8*sizeof(GLfloat),  // stride, 0 -> compact, OpenGL will compute it. non-zero --> number of bytes between two consecutive vertices
+            reinterpret_cast<GLvoid*>(6*sizeof(GLfloat)));   // offset
+
+    glEnableVertexAttribArray(2);
+
     glBindVertexArray(0);
-
-
 
     while(!glfwWindowShouldClose(window))
     {
@@ -166,8 +190,13 @@ int hello_texture()
 
         shader.useProgram();
 
+        glBindTexture(GL_TEXTURE_2D, texture1);
+
         glBindVertexArray(vao);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        glBindVertexArray(0);
+
+        glBindTexture(GL_TEXTURE_2D, 0);
 
         glfwSwapBuffers(window);
     }
