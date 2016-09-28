@@ -11,5 +11,5 @@ uniform sampler2D myTexture2;
 void main()
 {
     // (1-0.2)*first + 0.2*second
-    color = mix(texture(myTexture1, myTexCoord), texture(myTexture2, myTexCoord), 0.3);
+    color = mix(texture(myTexture1, myTexCoord), texture(myTexture2, myTexCoord), 0.2);
 }
