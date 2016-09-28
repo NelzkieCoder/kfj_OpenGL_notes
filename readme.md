@@ -13,6 +13,7 @@
     - [3_hello_triangle_color.cpp][34]
     - [3_hello_triangle_uniform.cpp][35]
  - [Textures][30]
+    - [4_hello_texure.cpp][39]
  - [Transformations][31]
  - [Coordinate Systems][32]
  - [Camera][33]
@@ -85,6 +86,10 @@ brew install --static glew
  - copy `libSOIL-master/libSOIL.dylib`
  - `export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:/Users/fangjun/Documents/bitbucket/kfj_OpenGL_notes/lib`
 
+
+
+
+[39]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/4_hello_texure.cpp
 [38]: https://vulkan-tutorial.com
 [37]: https://while.io
 [36]: https://open.gl
