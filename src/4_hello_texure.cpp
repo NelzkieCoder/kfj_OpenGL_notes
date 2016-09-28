@@ -38,6 +38,9 @@
 // texture image 1
 const static std::string kImg1 = "pic/container.jpg";
 
+// texture image 2
+const static std::string kImg2 = "pic/awesomeface.png";
+
 // Window dimensions
 const static GLuint kWidth = 800, kHeight = 600;
 
@@ -103,6 +106,7 @@ int hello_texture()
     shader.setFragShaderFilename(kFragShaderFilename);
     shader.linkProgram();
 
+    // texture1
     GLuint texture1;
     glGenTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, texture1);
@@ -123,6 +127,30 @@ int hello_texture()
 
     // unbind texture
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    // texture2
+    GLuint texture2;
+    glGenTextures(1, &texture2);
+    glBindTexture(GL_TEXTURE_2D, texture2);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // Set texture filtering
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // TODO: how is the image stored in the memory ???
+    // e.g: how are RGB values store?
+    unsigned char* img2 = SOIL_load_image(kImg2.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+    std::cout << "(" << width << ", " << height << ")" << std::endl;
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, img2);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SOIL_free_image_data(img2);
+
+    // unbind texture
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+
 
     GLfloat vertices[] = {
             // points         // color
@@ -192,13 +220,20 @@ int hello_texture()
 
         shader.useProgram();
 
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);
+        glUniform1i(glGetUniformLocation(shader.getProgram(), "myTexture1"), 0);
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, texture2);
+        glUniform1i(glGetUniformLocation(shader.getProgram(), "myTexture2"), 1);
+
 
         glBindVertexArray(vao);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
         glBindVertexArray(0);
 
-        glBindTexture(GL_TEXTURE_2D, 0);
+        //glBindTexture(GL_TEXTURE_2D, 0);
 
         glfwSwapBuffers(window);
     }
