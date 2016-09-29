@@ -36,6 +36,7 @@ set(CMAKE_CXX_LINK_FLAGS  "${CMAKE_CXX_LINK_FLAGS} ${myLib}")
 
 include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/inc
+        /usr/local/Cellar/glm/0.9.7.4/include   # for GLM, brew install glm
 )
 
 set(SOURCE_FILES
@@ -51,7 +52,9 @@ set(SOURCE_FILES
         src/3_hello_triangle_uniform.cpp
         src/3_hello_triangle_color.cpp
         src/util.cpp
-        src/Shader.cpp src/4_hello_texture.cpp)
+        src/Shader.cpp src/4_hello_texture.cpp
+        src/5_test_GLM.cpp
+        )
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
 
 

@@ -10,8 +10,9 @@ int hello_circle();
 int hello_triangle_uniform();
 int hello_triangle_color();
 int hello_texture();
+int test_glm();
 
-#define TEST hello_texture
+#define TEST test_glm
 
 int main(void)
 {

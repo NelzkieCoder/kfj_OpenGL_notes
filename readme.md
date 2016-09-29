@@ -87,7 +87,10 @@ brew install --static glew
  - `export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:/Users/fangjun/Documents/bitbucket/kfj_OpenGL_notes/lib`
 
 
-
+# GLM
+ - `brew install glm`
+ - It is installed inside `/usr/local/Cellar/glm/0.9.7.4` by default
+ - 
 
 [39]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/4_hello_texture.cpp
 [38]: https://vulkan-tutorial.com
