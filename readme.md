@@ -20,7 +20,9 @@
 
 
 
-## API manual
+## API manual and the core specification
+ - [OpenGL 4.5 Core Profile Specification][40], pdf
+ - [OpenGL Shading Language 4.50 Specification][41], pdf
  - [OpenGL 4.5 Reference Pages][6]
  - [OpenGL Registry][8], information for various versions of OpenGL.
 
@@ -90,8 +92,11 @@ brew install --static glew
 # GLM
  - `brew install glm`
  - It is installed inside `/usr/local/Cellar/glm/0.9.7.4` by default
- - 
+ -
 
+
+[41]: https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.4.50.pdf
+[40]: https://khronos.org/registry/OpenGL/specs/gl/glspec45.core.pdf
 [39]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/4_hello_texture.cpp
 [38]: https://vulkan-tutorial.com
 [37]: https://while.io

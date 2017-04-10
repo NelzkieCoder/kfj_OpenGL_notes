@@ -12,7 +12,7 @@ int hello_triangle_color();
 int hello_texture();
 int test_glm();
 
-#define TEST test_glm
+#define TEST hello_world
 
 int main(void)
 {

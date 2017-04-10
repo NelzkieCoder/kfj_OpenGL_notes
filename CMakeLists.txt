@@ -6,7 +6,6 @@ project(kfj_OpenGL_notes)
 
 # set(CMAKE_PREFIX_PATH /usr/local/Cellar/glew)
 
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # /usr/local/Cellar/glfw3/3.2.1/lib/libglfw3.dylib
@@ -27,12 +26,18 @@ link_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
-# libSOIL.dylib  -> https://github.com/smibarber/libSOIL
-# set DYLD_LIBRARY_PATH when run the program, because it is dynamic linked!
+#============================================================================
+# libSOIL, The Simple OpenGL Image Library for Mac OS X
+#----------------------------------------------------------------------------
+# source code is at https://github.com/smibarber/libSOIL
+# the compile library is saved in the lib/ directory
+# its header file is in in/ directory
+# set DYLD_LIBRARY_PATH when running the program, because it is dynamic linked!
+
+
 set(myLib  "-lSOIL -lglfw3 -lGLEW -framework OpenGL")
 
 set(CMAKE_CXX_LINK_FLAGS  "${CMAKE_CXX_LINK_FLAGS} ${myLib}")
-
 
 include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/inc
@@ -42,6 +47,7 @@ include_directories(
 set(SOURCE_FILES
         src/main.cpp
         src/util.cpp
+        src/common.cpp
         src/1_hello_world.cpp
         src/2_hello_triangle.cpp
         src/2_hello_triangle_with_element_buffer.cpp
