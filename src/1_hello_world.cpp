@@ -2,9 +2,17 @@
 // Created by fangjun on 17/09/16.
 //
 
+//! @file 1_hello_world.cpp
+//! It demostrates how to create a window with GLFW.
+//! When the user presses Esc, the window is closed automatically
+//! and the program exits.
+
 #include "common.hpp"
 
-//! @brief Display a window.
+//! Display a window.
+//! This is my first program in OpenGL, which just displays a window!
+//! Although it does nothing special, it is a big step forward!
+//!
 //! Press Esc to exit the program.
 //! return 0 on success
 int hello_world()

@@ -44,7 +44,7 @@ const static std::string kFragShaderFilename = "src/shaders/2_hello_triangle_fra
 
 
 
-std::string loadShaderFromFile(const std::string filename);
+std::string load_shader_from_file(const std::string filename);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 

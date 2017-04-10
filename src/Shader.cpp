@@ -2,9 +2,9 @@
 // Created by fangjun on 24/09/16.
 //
 
-#include "Shader.hpp"
+#include "shader.hpp"
 
-std::string loadShaderFromFile(const std::string filename);
+std::string load_shader_from_file(const std::string& filename);
 
 Shader::Shader()
     : m_program(0)
@@ -24,7 +24,7 @@ void Shader::setFragShaderFilename(const std::string &f_filename)
 
 void Shader::linkProgram()
 {
-    m_vertexCode = loadShaderFromFile(m_vertexFilename);
+    m_vertexCode = load_shader_from_file(m_vertexFilename);
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
     const char *p = m_vertexCode.c_str();
@@ -44,7 +44,7 @@ void Shader::linkProgram()
         exit(-1);
     }
 
-    m_fragCode = loadShaderFromFile(m_fragFilename);
+    m_fragCode = load_shader_from_file(m_fragFilename);
     GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
 
     p = m_fragCode.c_str();

@@ -6,7 +6,15 @@ project(kfj_OpenGL_notes)
 
 # set(CMAKE_PREFIX_PATH /usr/local/Cellar/glew)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra")
+
+if (true)
+  # refer to Useful GCC flags for C, http://stackoverflow.com/questions/3375697/useful-gcc-flags-for-c
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wunreachable-code")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcast-align -Wstrict-prototypes -Wstrict-prototypes")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wstrict-overflow=5 -Wwrite-strings -Waggregate-return")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcast-qual -Wswitch-default -Wswitch-enum -Wconversion")
+endif()
 
 # /usr/local/Cellar/glfw3/3.2.1/lib/libglfw3.dylib
 # brew update
@@ -48,19 +56,24 @@ set(SOURCE_FILES
         src/main.cpp
         src/util.cpp
         src/common.cpp
-        src/1_hello_world.cpp
-        src/2_hello_triangle.cpp
-        src/2_hello_triangle_with_element_buffer.cpp
-        src/2_hello_two_triangles.cpp
-        src/2_hello_two_triangles_2.cpp
-        src/2_hello_two_triangles_2_with_different_color.cpp
-        src/2_hello_circle.cpp
-        src/3_hello_triangle_uniform.cpp
-        src/3_hello_triangle_color.cpp
-        src/util.cpp
-        src/Shader.cpp src/4_hello_texture.cpp
-        src/5_test_GLM.cpp
+        src/shader.cpp
+        src/printsysteminfo.cpp
         )
+
+set(SOURCE_FILES
+    ${SOURCE_FILES}
+    src/1_hello_world.cpp
+    src/2_hello_triangle.cpp
+    src/2_hello_triangle_with_element_buffer.cpp
+    src/2_hello_two_triangles.cpp
+    src/2_hello_two_triangles_2.cpp
+    src/2_hello_two_triangles_2_with_different_color.cpp
+    src/2_hello_circle.cpp
+    src/3_hello_triangle_uniform.cpp
+    src/3_hello_triangle_color.cpp
+    src/4_hello_texture.cpp
+    src/5_test_GLM.cpp
+    )
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
 
 

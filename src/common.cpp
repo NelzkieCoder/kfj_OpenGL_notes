@@ -5,11 +5,8 @@
 
 #include "common.hpp"
 
-int create_context(GLFWwindow **window)
+int create_context(GLFWwindow **window, GLint width, GLint height)
 {
-  const static GLuint sWidth = 800;   // window width
-  const static GLuint sHeight = 600;  // window height
-
   glfwInit();
 
   // refer to http://www.glfw.org/docs/latest/window.html#window_hints
@@ -19,7 +16,7 @@ int create_context(GLFWwindow **window)
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-  *window = glfwCreateWindow(sWidth, sHeight, "LearnOpenGL", nullptr, nullptr);
+  *window = glfwCreateWindow(width, height, "LearnOpenGL", nullptr, nullptr);
   if (*window == nullptr)
   {
       std::cout << "Failed to create GLFW window" << std::endl;
@@ -42,12 +39,12 @@ int create_context(GLFWwindow **window)
   }
 
   // set viewport
-  int width, height;
-  glfwGetFramebufferSize(*window, &width, &height);
+  int w, h;
+  glfwGetFramebufferSize(*window, &w, &h);
 
   // map normalized device coordinates
   // [-1, 1] --> [0, 800]
   //             [0, 600]
-  glViewport(0, 0, width, height);
+  glViewport(0, 0, w, h);
   return 0;
 }

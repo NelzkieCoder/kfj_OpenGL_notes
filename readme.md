@@ -5,6 +5,7 @@
 
 
 # TODO
+ - ~~[Display a window][42]~~ -> [1_hello_world.cpp][43]
  - ~~[Draw a triangle][19]~~ -> [2_hello_triangle.cpp][21], [2_hello_triangle_with_element_buffer.cpp][25]
    - ~~Use element buffer~~ -> [2_hello_triangle_with_element_buffer.cpp][22]
    - ~~draw two triangles~~ -> [2_hello_two_triangles.cpp][26], [2_hello_two_triangles_2.cpp][27], [2_hello_two_triangles_2_with_different_color.cpp][28]
@@ -94,7 +95,8 @@ brew install --static glew
  - It is installed inside `/usr/local/Cellar/glm/0.9.7.4` by default
  -
 
-
+[43]: src/1_hello_world.cpp
+[42]: https://learnopengl.com/#!Getting-started/Hello-Window
 [41]: https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.4.50.pdf
 [40]: https://khronos.org/registry/OpenGL/specs/gl/glspec45.core.pdf
 [39]: https://github.com/csukuangfj/kfj_OpenGL_notes/blob/master/src/4_hello_texture.cpp

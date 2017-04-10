@@ -40,7 +40,7 @@ const static std::string kVertexShaderFilename = "src/shaders/3_hello_triangle_v
 const static std::string kFragShaderFilename = "src/shaders/3_hello_triangle_fragment_shader_color.txt";
 
 
-std::string loadShaderFromFile(const std::string filename);
+std::string load_shader_from_file(const std::string filename);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 
