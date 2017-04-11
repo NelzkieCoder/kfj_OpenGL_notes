@@ -103,7 +103,7 @@ int hello_texture()
     // load shaders
     Shader shader;
     shader.setVertexShaderFilename(kVertexShaderFilename);
-    shader.setFragShaderFilename(kFragShaderFilename);
+    shader.setFragmentShaderFilename(kFragShaderFilename);
     shader.linkProgram();
 
     // texture1

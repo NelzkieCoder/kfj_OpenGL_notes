@@ -89,7 +89,7 @@ int hello_triangle_color()
 
     Shader shader;
     shader.setVertexShaderFilename(kVertexShaderFilename);
-    shader.setFragShaderFilename(kFragShaderFilename);
+    shader.setFragmentShaderFilename(kFragShaderFilename);
     shader.linkProgram();
 
 

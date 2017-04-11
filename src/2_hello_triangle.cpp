@@ -62,7 +62,7 @@ int hello_triangle()
 
     Shader shader;
     shader.setVertexShaderFilename(vertex_shader_filename);
-    shader.setFragShaderFilename(fragment_shader_filename);
+    shader.setFragmentShaderFilename(fragment_shader_filename);
     shader.linkProgram();
 
     // set the coordinates of the triangle vertices
@@ -95,6 +95,9 @@ int hello_triangle()
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);   // reset
     glBindVertexArray(0);
+
+    // commet it out to fill the triangle
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     shader.useProgram();
     while(!glfwWindowShouldClose(window))

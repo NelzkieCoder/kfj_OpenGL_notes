@@ -7,87 +7,113 @@
 std::string load_shader_from_file(const std::string& filename);
 
 Shader::Shader()
-    : m_program(0)
+  : m_program(0)
 {
 
+}
+
+Shader::~Shader()
+{
+  if(0 == m_program)
+  {
+    glDeleteProgram(m_program);
+  }
 }
 
 void Shader::setVertexShaderFilename(const std::string &f_filename)
 {
-    m_vertexFilename = f_filename;
+  m_vertex_filename = f_filename;
 }
 
-void Shader::setFragShaderFilename(const std::string &f_filename)
+void Shader::setVertexShaderSource(const std::string& f_vertex_code)
 {
-    m_fragFilename = f_filename;
+  m_vertex_code = f_vertex_code;
+}
+
+void Shader::setFragmentShaderFilename(const std::string &f_filename)
+{
+  m_fragment_filename = f_filename;
+}
+
+void Shader::setFragmentShaderSource(const std::string& f_fragment_code)
+{
+  m_fragment_code = f_fragment_code;
 }
 
 void Shader::linkProgram()
 {
-    m_vertexCode = load_shader_from_file(m_vertexFilename);
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+  if (!m_vertex_code.size())
+  {
+    m_vertex_code = load_shader_from_file(m_vertex_filename);
+  }
 
-    const char *p = m_vertexCode.c_str();
-    glShaderSource(vertexShader, 1, &p, nullptr);
-    glCompileShader(vertexShader);
+  GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
-    GLint success = GL_FALSE;
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        GLint len;
-        glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &len);
-        std::string logInfo(len - 1, 0); // as null terminator is contained in the length
-        glGetShaderInfoLog(vertexShader, len, nullptr, &logInfo[0]);
-        std::cout << "compile info for vertex shader : " << std::endl
-        << logInfo << std::endl;
-        exit(-1);
-    }
+  const char *p = m_vertex_code.c_str();
+  glShaderSource(vertexShader, 1, &p, nullptr);
+  glCompileShader(vertexShader);
 
-    m_fragCode = load_shader_from_file(m_fragFilename);
-    GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+  GLint success = GL_FALSE;
+  glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+  if(!success)
+  {
+    GLint len;
+    glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &len);
+    std::string logInfo(len - 1, 0); // as null terminator is contained in the length
+    glGetShaderInfoLog(vertexShader, len, nullptr, &logInfo[0]);
+    std::cout << "compile info for vertex shader : " << std::endl
+    << logInfo << std::endl;
+    exit(-1);
+  }
 
-    p = m_fragCode.c_str();
-    glShaderSource(fragShader, 1, &p, nullptr);
-    glCompileShader(fragShader);
+  if (!m_fragment_code.size())
+  {
+    m_fragment_code = load_shader_from_file(m_fragment_filename);
+  }
 
-    success = GL_FALSE;
-    glGetShaderiv(fragShader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        GLint len;
-        glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &len);
-        std::string logInfo(len - 1, 0); // as null terminator is contained in the length
-        glGetShaderInfoLog(fragShader, len, nullptr, &logInfo[0]);
-        std::cout << "compile info for fragment shader : " << std::endl
-        << logInfo << std::endl;
-        exit(-1);
-    }
+  GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
 
-    // link shaders into a program
-    m_program = glCreateProgram();
-    glAttachShader(m_program, vertexShader);
-    glAttachShader(m_program, fragShader);
-    glLinkProgram(m_program);
+  p = m_fragment_code.c_str();
+  glShaderSource(fragShader, 1, &p, nullptr);
+  glCompileShader(fragShader);
 
-    success = GL_FALSE;
-    glGetProgramiv(m_program, GL_LINK_STATUS, &success);
-    if(!success)
-    {
-        GLint len;
-        glGetProgramiv(m_program, GL_INFO_LOG_LENGTH, &len);
-        std::string logInfo(len - 1, 0); // as null terminator is contained in the length
-        glGetProgramInfoLog(m_program, len, nullptr, &logInfo[0]);
-        std::cout << "link info for program : " << std::endl
-        << logInfo << std::endl;
-        exit(-1);
-    }
+  success = GL_FALSE;
+  glGetShaderiv(fragShader, GL_COMPILE_STATUS, &success);
+  if(!success)
+  {
+      GLint len;
+      glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &len);
+      std::string logInfo(len - 1, 0); // as null terminator is contained in the length
+      glGetShaderInfoLog(fragShader, len, nullptr, &logInfo[0]);
+      std::cout << "compile info for fragment shader : " << std::endl
+      << logInfo << std::endl;
+      exit(-1);
+  }
 
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragShader);
+  // link shaders into a program
+  m_program = glCreateProgram();
+  glAttachShader(m_program, vertexShader);
+  glAttachShader(m_program, fragShader);
+  glLinkProgram(m_program);
+
+  success = GL_FALSE;
+  glGetProgramiv(m_program, GL_LINK_STATUS, &success);
+  if(!success)
+  {
+      GLint len;
+      glGetProgramiv(m_program, GL_INFO_LOG_LENGTH, &len);
+      std::string logInfo(len - 1, 0); // as null terminator is contained in the length
+      glGetProgramInfoLog(m_program, len, nullptr, &logInfo[0]);
+      std::cout << "link info for program : " << std::endl
+      << logInfo << std::endl;
+      exit(-1);
+  }
+
+  glDeleteShader(vertexShader);
+  glDeleteShader(fragShader);
 }
 
 void Shader::useProgram() const
 {
-    glUseProgram(m_program);
+  glUseProgram(m_program);
 }

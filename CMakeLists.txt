@@ -74,6 +74,14 @@ set(SOURCE_FILES
     src/4_hello_texture.cpp
     src/5_test_GLM.cpp
     )
+
+set(SOURCE_FILES
+    ${SOURCE_FILES}
+    src/exercises/hello-triangle-ex01.cpp
+    src/exercises/hello-triangle-ex01-01.cpp
+    src/exercises/hello-triangle-ex02.cpp
+    src/exercises/hello-triangle-ex03.cpp
+)
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
 
 

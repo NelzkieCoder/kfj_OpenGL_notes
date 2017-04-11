@@ -21,15 +21,24 @@ class Shader {
 public:
     Shader();
 
-    /**
-     * set the filename for vertex shader
-     */
+    ~Shader();
+
+
+    //! Set the filename for vertex shader
+    //! @param f_filename [in] Name of the vertex shader source file
     void setVertexShaderFilename(const std::string& f_filename);
 
-    /**
-     * set the filename for fragment shader
-     */
-    void setFragShaderFilename(const std::string& f_filename);
+    //! Set the vertex shader source code.
+    //! @param f_vertex_code [in] The source code of the vertex shader.
+    void setVertexShaderSource(const std::string& f_vertex_code);
+
+    //! set the filename for fragment shader
+    //! @param f_filename [in] Name of the fragment shader source file
+    void setFragmentShaderFilename(const std::string& f_filename);
+
+    //! Set the fragment shader source code
+    //! @param f_fragment_code [in] The source code of the fragment shader.
+    void setFragmentShaderSource(const std::string& f_fragment_code);
 
     /**
      * compile shaders and link them into a program
@@ -44,26 +53,11 @@ public:
     GLuint getProgram() const {return m_program;}
 
 private:
-    GLuint m_program;
-    /**
-     * contains source code for vertex shader
-     */
-    std::string m_vertexCode;
-
-    /**
-     * filename for vertex shader
-     */
-    std::string m_vertexFilename;
-
-    /**
-     * contains source code for fragment shader
-     */
-    std::string m_fragCode;
-
-    /**
-     * filename for fragment shader
-     */
-    std::string m_fragFilename;
+    GLuint m_program; //!< the program object linked from the vertex and fragment shader
+    std::string m_vertex_code;  //!< contains source code for vertex shader
+    std::string m_vertex_filename;  //!< filename for vertex shader
+    std::string m_fragment_code;  //!< contains source code for fragment shader
+    std::string m_fragment_filename; //!< filename for fragment shader
 };
 
 

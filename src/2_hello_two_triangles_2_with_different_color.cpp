@@ -18,12 +18,12 @@ int hello_two_triangles_2_with_different_color()
 
     Shader shader1;
     shader1.setVertexShaderFilename(vertex_shader_Filename);
-    shader1.setFragShaderFilename(fragment_shader_filename1);
+    shader1.setFragmentShaderFilename(fragment_shader_filename1);
     shader1.linkProgram();
 
     Shader shader2;
     shader2.setVertexShaderFilename(vertex_shader_Filename);
-    shader2.setFragShaderFilename(fragment_shader_filename2);
+    shader2.setFragmentShaderFilename(fragment_shader_filename2);
     shader2.linkProgram();
 
     // set the coordinate of the triangle vertices

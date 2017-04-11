@@ -39,7 +39,15 @@ int test_glm();
 
 int print_system_info();
 
-#define TEST print_system_info
+//===============
+// Exercises
+//---------------
+int ex01_hello_triangle();
+int ex01_01_hello_triangle();
+int ex02_hello_triangle();
+int ex03_hello_triangle();
+
+#define TEST ex03_hello_triangle
 
 int main(void)
 {

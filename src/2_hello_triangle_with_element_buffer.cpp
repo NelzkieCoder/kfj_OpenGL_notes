@@ -23,7 +23,7 @@ int hello_triangle_with_element_buffer()
 
     Shader shader;
     shader.setVertexShaderFilename(vertex_shader_filename);
-    shader.setFragShaderFilename(fragment_shader_filename);
+    shader.setFragmentShaderFilename(fragment_shader_filename);
     shader.linkProgram();
 
     // set the coordinate of the rectangle vertices

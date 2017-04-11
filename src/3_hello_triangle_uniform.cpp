@@ -91,7 +91,7 @@ int hello_triangle_uniform()
 
     Shader shader;
     shader.setVertexShaderFilename(kVertexShaderFilename);
-    shader.setFragShaderFilename(kFragShaderFilename);
+    shader.setFragmentShaderFilename(kFragShaderFilename);
     shader.linkProgram();
 
 

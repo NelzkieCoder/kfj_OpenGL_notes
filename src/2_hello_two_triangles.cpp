@@ -93,7 +93,7 @@ int hello_two_triangles()
 
     Shader shader;
     shader.setVertexShaderFilename(kVertexShaderFilename);
-    shader.setFragShaderFilename(kFragShaderFilename);
+    shader.setFragmentShaderFilename(kFragShaderFilename);
     shader.linkProgram();
 
 

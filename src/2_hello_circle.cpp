@@ -21,7 +21,7 @@ int hello_circle()
 
     Shader shader;
     shader.setVertexShaderFilename(vertex_shader_filename);
-    shader.setFragShaderFilename(fragment_shader_filename);
+    shader.setFragmentShaderFilename(fragment_shader_filename);
     shader.linkProgram();
 
     const GLfloat pi = 3.1415926f;
