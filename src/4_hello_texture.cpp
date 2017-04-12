@@ -11,7 +11,7 @@
 //! blending weight for the two textures
 static float alpha = 0.2f;
 
-void my_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+static void my_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
     // close the window when Esc is pressed
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)

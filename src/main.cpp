@@ -60,7 +60,9 @@ int ex01_hello_shaders();
 int ex02_hello_shaders();
 int texture_exercise();
 
-#define TEST hello_texture
+int ex01_glm();
+
+#define TEST ex01_glm
 
 int main(void)
 {

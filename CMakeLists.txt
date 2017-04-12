@@ -40,7 +40,7 @@ link_directories(
 # source code is at https://github.com/smibarber/libSOIL
 # the compile library is saved in the lib/ directory
 # its header file is in in/ directory
-# set DYLD_LIBRARY_PATH when running the program, because it is dynamic linked!
+# set DYLD_LIBRARY_PATH when running the program, because it is linked dynamically!
 
 
 set(myLib  "-lSOIL -lglfw3 -lGLEW -framework OpenGL")
@@ -80,6 +80,7 @@ set(SOURCE_FILES
     src/exercises/hello-shaders-ex01.cpp
     src/exercises/hello-shaders-ex02.cpp
     src/exercises/texture-ex.cpp
+    src/exercises/glm_ex01.cpp
 )
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
 
