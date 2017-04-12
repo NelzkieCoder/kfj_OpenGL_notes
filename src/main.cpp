@@ -14,6 +14,7 @@
 //!  - @ref hello_triangle_with_element_buffer, draw two triangles
 //!  - @ref hello_circle, draw a circle
 //!  - @ref hello_two_triangles_2_with_different_color, draw two triangles with different colors
+//!  - @ref hello_texture, use of texutre
 //!
 //!  <h3>Exercises</h3>
 //!  - @ref ex01_hello_shaders
@@ -57,8 +58,9 @@ int ex02_hello_triangle();
 int ex03_hello_triangle();
 int ex01_hello_shaders();
 int ex02_hello_shaders();
+int texture_exercise();
 
-#define TEST ex02_hello_shaders
+#define TEST hello_texture
 
 int main(void)
 {

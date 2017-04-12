@@ -37,3 +37,6 @@ std::string load_shader_from_file(const std::string& filename);
 
 //! Path to the shader files.
 const static std::string g_shader_path = "/Users/fangjun/Documents/bitbucket/kfj_OpenGL_notes";
+
+//! Path to the images
+const static std::string g_pic_path = "/Users/fangjun/Documents/bitbucket/kfj_OpenGL_notes";

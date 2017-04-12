@@ -1,74 +1,42 @@
-//
-// Created by fangjun on 28/09/16.
-//
-
 #include "common.hpp"
 #include "shader.hpp"
 
 // https://github.com/smibarber/libSOIL
 #include "SOIL.h"
 
-//! blending weight for the two textures
-static float alpha = 0.2f;
-
-void my_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-    // close the window when Esc is pressed
-    if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    {
-      glfwSetWindowShouldClose(window, GL_TRUE);
-    } else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
-    {
-      alpha += 0.1f;
-      alpha = (alpha > 1.0f) ? 1.0f : alpha;
-
-    } else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
-    {
-      alpha -= 0.1f;
-      alpha = (alpha < 0.0f) ? 0.0f : alpha;
-    }
-}
-
-
-//! Use of texture.
-//!
-//! Press the arrow key "up" or "down" to see the effect of texture blending.
-//!
-//! @todo how is the image loaded by SOIL stored in the memory.
-//! @image html pic/exercises/texture-01.png "Output"
-int hello_texture()
+//! It demonstrates using different textures for different objects.
+//! @sa hello_texture
+//! @image html pic/exercises/texture-02.png "Output"
+int texture_exercise()
 {
     std::string img1_path = g_pic_path + "/pic/container.jpg";  // texture image 1
     std::string img2_path = g_pic_path + "/pic/awesomeface.png"; // texture image 2
 
     std::string vertex_source =
     "#version 330 core" "\n"
-    "layout (location = 0) in vec2 pos;"  "\n"
+    "layout (location = 0) in vec3 pos;"  "\n"
     "layout (location = 1) in vec2 in_tex_coord;"  "\n"
     "out vec2 tex_coord;"  "\n"
     "void main()" "\n"
     "{" "\n"
-    "   gl_Position = vec4(pos, 0.0, 1.0);" "\n"
+    "   gl_Position = vec4(pos, 1.0);" "\n"
     "   tex_coord = vec2(in_tex_coord.x, 1-in_tex_coord.y);" "\n" // flip the texture image
-    "}"
+    "}"  "\n"
     ;
 
     std::string fragment_source =
     "#version 330 core"  "\n"
-    "uniform float alpha;"
     "in vec2 tex_coord;" "\n"
     "out vec4 color;"  "\n"
-    "uniform sampler2D myTexture1;" "\n"
-    "uniform sampler2D myTexture2;" "\n"
+    "uniform sampler2D myTexture;" "\n"
     "void main()"   "\n"
-    "{"   "\n" // (1-alpha)*first + alpha*second
-    "   color = mix(texture(myTexture1, tex_coord), texture(myTexture2, tex_coord), alpha);"  "\n"
+    "{"   "\n"
+    "   color = texture(myTexture, tex_coord);"  "\n"
     "}"
     ;
 
     GLFWwindow *window;
     create_context(&window);
-    glfwSetKeyCallback(window, my_key_callback);
 
     Shader shader;
     shader.setVertexShaderSource(vertex_source);
@@ -86,16 +54,11 @@ int hello_texture()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    // TODO: how is the image stored in the memory ???
-    // e.g: how are RGB values store?
     int width, height;
     unsigned char* img1 = SOIL_load_image(img1_path.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, img1);
     glGenerateMipmap(GL_TEXTURE_2D);
     SOIL_free_image_data(img1);
-
-    // unbind texture
-    glBindTexture(GL_TEXTURE_2D, 0);
 
     // texture2
     GLuint texture2;
@@ -113,52 +76,60 @@ int hello_texture()
     glGenerateMipmap(GL_TEXTURE_2D);
     SOIL_free_image_data(img2);
 
-    // unbind texture
     glBindTexture(GL_TEXTURE_2D, 0);
 
     GLfloat vertices[] = {
-            // points   texture coordinate
-            0.5f, 0.5f,   1.0f, 1.0f,   // top right
-            0.5f, -0.5f,  1.0f, 0.0f,   // bottom right
-            -0.5f, -0.5f, 0.0f, 0.0f,   // bottom left
-            -0.5f, 0.5f,  0.0f, 1.0f,   // top left
+        // first triangle
+        -0.5f, 0, // left, 0
+        -0.1f, 0, // right, 1
+        -0.1f, 0.5f, //top , 2
+        // second triangle
+        0.1f, 0, // left, 3
+        0.5f, 0, // right, 4
+        0.1f, 0.5f, // top, 5
     };
 
-    GLuint indices[] = {
-            0, 1, 3,    // top right triangle
-            1, 2, 3,    // top left triangle
+    GLfloat texture_coordinates[] = {
+        // texture coordinate of the first triangle
+        0, 0,
+        1, 0,
+        0.5f, 1,
+        // texture coordinate of the second triangle
+        0, 0,
+        1, 0,
+        0.5f, 1
     };
 
-    GLuint vao, vbo, ebo;
+    GLuint vao, vbo[2];
     glGenVertexArrays(1, &vao);
-    glGenBuffers(1, &vbo);
-    glGenBuffers(1, &ebo);
+    glGenBuffers(2, vbo);
 
     glBindVertexArray(vao);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(texture_coordinates), texture_coordinates, GL_STATIC_DRAW);
 
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
     glVertexAttribPointer(
             0, // index, which attribute
             2, // number of component per vertex attribute. Each coordinate contains 3 component
             GL_FLOAT, // data type of each component
             GL_FALSE, // need to be normalized ?
-            4*sizeof(GLfloat),  // stride
+            0,  // stride
             nullptr);   // offset
-
     glEnableVertexAttribArray(0);
 
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
     glVertexAttribPointer(
             1, // index, which attribute
             2, // number of component per vertex attribute. Each coordinate contains 3 component
             GL_FLOAT, // data type of each component
             GL_FALSE, // need to be normalized ?
-            4*sizeof(GLfloat),  // stride
-            reinterpret_cast<GLvoid*>(2*sizeof(GLfloat)));   // offset
+            0,  // stride
+            nullptr);   // offset
 
     glEnableVertexAttribArray(1);
 
@@ -167,11 +138,9 @@ int hello_texture()
     shader.useProgram();
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture1);
-    glUniform1i(glGetUniformLocation(shader.getProgram(), "myTexture1"), 0);
 
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture2);
-    glUniform1i(glGetUniformLocation(shader.getProgram(), "myTexture2"), 1);
 
     while(!glfwWindowShouldClose(window))
     {
@@ -180,18 +149,20 @@ int hello_texture()
         // clear the color buffer
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        glUniform1f(glGetUniformLocation(shader.getProgram(), "alpha"), alpha);
 
         glBindVertexArray(vao);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        glUniform1i(glGetUniformLocation(shader.getProgram(), "myTexture"), 0);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        glUniform1i(glGetUniformLocation(shader.getProgram(), "myTexture"), 1);
+        glDrawArrays(GL_TRIANGLES, 3, 3);
         glBindVertexArray(0);
 
         glfwSwapBuffers(window);
     }
 
     glDeleteVertexArrays(1, &vao);
-    glDeleteBuffers(1, &vbo);
-    glDeleteBuffers(1, &ebo);
+    glDeleteBuffers(2, vbo);
 
     return 0;
 }

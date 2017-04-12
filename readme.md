@@ -3,6 +3,20 @@
 
  The IDE used is [CLion][1]. Its configuration file on Mac OS x is `~/Library/Preferences/CLion2016.1`.
 
+# Coordinates
+ - origin: bottom left
+ - x-axis: points to rightward
+ - y-axis: points to upward
+ - homogenous coordinate
+ - range: [-1, 1]
+ - xyzw
+
+## texture coordinate
+ - origin: bottom left
+ - range: [0, 1]
+ - x-axis: points to rightward
+ - y-axis: points to upward
+ - stpq
 
 # TODO
  - ~~[Display a window][42]~~ -> [1_hello_world.cpp][43]
