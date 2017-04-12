@@ -14,6 +14,15 @@
 //!  - @ref hello_triangle_with_element_buffer, draw two triangles
 //!  - @ref hello_circle, draw a circle
 //!  - @ref hello_two_triangles_2_with_different_color, draw two triangles with different colors
+//!
+//!  <h3>Exercises</h3>
+//!  - @ref ex01_hello_shaders
+//!  - @ref ex01_01_hello_triangle
+//!  - @ref ex01_hello_triangle
+//!  - @ref ex02_hello_triangle
+//!  - @ref ex03_hello_triangle
+//!  - @ref ex01_hello_shaders
+//!
 //!  <h3>References</h3>
 //!   -# [Tips for writing doxygen documentation](https://www.rosettacommons.org/manuals/rosetta3.2_user_guide/doxygen_tips.html)
 
@@ -46,8 +55,10 @@ int ex01_hello_triangle();
 int ex01_01_hello_triangle();
 int ex02_hello_triangle();
 int ex03_hello_triangle();
+int ex01_hello_shaders();
+int ex02_hello_shaders();
 
-#define TEST ex03_hello_triangle
+#define TEST ex02_hello_shaders
 
 int main(void)
 {

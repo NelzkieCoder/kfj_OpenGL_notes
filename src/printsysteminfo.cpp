@@ -59,6 +59,8 @@ extensions:
  42: GL_APPLE_texture_range
  43: GL_ATI_texture_mirror_once
  44: GL_NV_texture_barrier
+ -----
+ Max. number of supported vertex attributes: 16
 @endcode
 */
 int print_system_info()
@@ -86,7 +88,9 @@ int print_system_info()
     const GLubyte* extension = glGetStringi(GL_EXTENSIONS, (GLuint)i);
     ss << " " << i << ": " << (char*)extension << std::endl;
   }
-
+  ss << "-----" << std::endl;
+  glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &n);
+  ss << "Max. number of supported vertex attributes: " << n << std::endl;
   std::cout << ss.str();
 
   glfwTerminate();

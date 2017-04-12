@@ -65,12 +65,8 @@ set(SOURCE_FILES
     src/1_hello_world.cpp
     src/2_hello_triangle.cpp
     src/2_hello_triangle_with_element_buffer.cpp
-    src/2_hello_two_triangles.cpp
-    src/2_hello_two_triangles_2.cpp
     src/2_hello_two_triangles_2_with_different_color.cpp
     src/2_hello_circle.cpp
-    src/3_hello_triangle_uniform.cpp
-    src/3_hello_triangle_color.cpp
     src/4_hello_texture.cpp
     src/5_test_GLM.cpp
     )
@@ -81,6 +77,8 @@ set(SOURCE_FILES
     src/exercises/hello-triangle-ex01-01.cpp
     src/exercises/hello-triangle-ex02.cpp
     src/exercises/hello-triangle-ex03.cpp
+    src/exercises/hello-shaders-ex01.cpp
+    src/exercises/hello-shaders-ex02.cpp
 )
 add_executable(kfj_OpenGL_notes ${SOURCE_FILES})
 
